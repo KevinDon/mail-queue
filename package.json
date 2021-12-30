@@ -12,6 +12,15 @@
     "http-errors": "~1.6.3",
     "jade": "~1.11.0",
     "morgan": "~1.9.1",
-    "mysql": "^2.18.1"
+    "mysql": "^2.18.1",
+    "mysql2": "^2.3.3",
+    "typeorm": "^0.2.41",
+    "reflect-metadata": "^0.1.12",
+    "lodash": "^4.17.21",
+    "moment": "^2.29.1",
+    "log4js": "^6.1.0",
+    "redis": "^2.8.0",
+    "joi": "latest",
+    "typescript": "^4.5.4"
   }
 }

@@ -1,9 +1,29 @@
+// import createError from 'http-errors';
+// import express from 'express';
+// import path from 'path';
+// import cookieParser from 'cookie-parser';
+// import logger from 'morgan';
+// import typeOrm from 'typeorm';
+// import dbConfig from './config/db.config.js';
+// import {emailSubmission} from './entity/emailSubmissionEntity.js';
+
+/* TODO 修改成ES6*/
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
+
+// var typeOrm = require('typeorm');
+// var emailSubmission = require('./entity/emailSubmissionEntity')
+
+
+// import indexRouter from './routes/index.js';
+// import usersRouter from './routes/users.js';
+// import sendEmailRouter from './routes/naSendEmail.js';
+
+/* TODO 修改成ES6*/
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var sendEmailRouter = require('./routes/naSendEmail');
@@ -22,7 +42,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-app.use('/sendemail', sendEmailRouter);
+app.use('/apis/sendemail', sendEmailRouter);
+
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
