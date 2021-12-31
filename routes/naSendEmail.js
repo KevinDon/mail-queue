@@ -6,7 +6,7 @@
 var express = require('express');
 var router = express.Router();
 var URL = require('url');
-
+var gatherEmailController = require('../apps/gatherEmail/controller/gatherEmailController')
 //加载mysql模块
 const mysql = require("mysql2");
 const dbConfig = require("../config/db.config");
@@ -27,6 +27,7 @@ var  sql = 'SELECT * FROM na_email_submission';
 
 /* Send Email Newaim. */
 router.post('/', function(req, res, next) {
+    gatherEmailController.downloadGoogleFile();
     connection.query(sql, function (err, result) {
         if(err){
             console.log('[SELECT ERROR] - ',err.message);

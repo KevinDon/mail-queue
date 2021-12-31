@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "kevin-newaim",
+  "private_key_id": "8c78633d0ba73f798d40f7242ea6ee1f0a850118",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQDgA+WYJMKwhlBW\nGdjPyTj7RBsJCsXVZbxiD+Vr1Sf4w+3Lv1GQ+CDPwKdOIgs3XV9OAJNZ6T5v+v8S\n1wb5t7hTt7dbLwos4kmkFLuq6nt6chu1Nsd/mL47Yj6lT9PunGykXgS1iuzGCPZP\nHJ+RxrSnH5jZ+guiJ6xL1RvojBxiTdzTKRXy0SKEKnLvPUdHNVe/J6NCRt4CF47M\njlPpkiu6lLruREXgpWY2Vvj5Lo9uzm/nky7XqJoX6+RJwamQkeHiY+UnUe+hKPDw\n08JGyTHnAf5z8X/AWXSMW3v5LJw1PXAjXelA2JmBrZYQRj3SrnhRy4659ymrCr5J\n1SHcJCxDAgMBAAECggEAK4IGPxDwsSk9BCP7/ItH4mE9YPmzJ7mdJ2yP8ewR2dpv\n3nEXjfDrKn5v4Bhzljqvzm4FMGLBKi2VCdsycyCwD65wUajmsIX4qIIQWuc0uTjd\nUcpEX+9SDyWLJj9FWaQO47OQ9ZN4XhQShpX4Fe+CWa0k2j0aslFDQO0wgO9pedvp\ndiXF7PyrmNwbOULuPL/xaQ/07pVzJNvM9GvgzzLPihw0RxYWwluV+S6HAjThxYqr\nGHxSMDKxZP4pARzeDWZbWew+I5ylsq20cPtRQHifR8U6PKUWTAnurdIMN8ORa3YQ\nBqFkDjqA2ueOIifkJmCxb6Tc4nJG9ylsCu4ilPUtBQKBgQD2pCd5+Al33Ci0Ye3a\ng6jocpFBPnXKAYSFeb0myJlqoeLJIrTUu6gWy1LywUh8tbGrW2EaoULkUKPuyU2I\n0dH38prJqjfEqfVepzXDRmzBZEukuwZHMSYuSzhcxhAB3HiRkUsoGaA1IPOWY0yP\nl8YGWYqZt+V34nNLrM4bHi/m/wKBgQDog/TEHl3ndyE1W7hcbdN9C7zjWLabD30g\nta7E/Ete+t+m7mCiMxdjp92Yh+2OLJlCq0fq3wWH7bmIkVxSVjeyqY0mttvvGs/z\n295zk6qccrueqPQC3e99z0llGAZTJgF9AHEB3L46YAOt9wxwcxrkBSPGAmXQ7cLv\nwWB+8QtevQKBgQCff/z/hYYp+zhfns0A+Q/sctq4xLnLzztyTg4i3KtKKDLPPCCR\nSmIji42y64gDDkU9ubSMUik+GWBKdegsSPRuUngDXo7+IaNKePvtssd2MXQxrbkb\npQ859O8YIAYODhPyn3FpF1lhwlOEt+a1HcO0K4fUbPZ6lvlUwQXwx47W5QKBgBgY\n1N0eaIz8g6yL/OdXWnuzI7hMEWCwkj85lQtFOmp1hYg/XDRzJxFk7EpKjAwYAyot\nph5pTqFvubK1nePKm6sgd0hz2wdEuBiFyOAhhaUBHwCqcd96ML/RI8IeY0lqvuy9\nhviyb+SM3tTArcFZrIfFIJf816B3g6RlXiLJyGvhAoGBAOhM//vEMKe3Z33Oje7D\nKHGnZmxl7BHBcKuGADGPUY70d8AHjAu+9lZVHxx2uX4D0cRWDCPfknGhyW/MgiDe\nOPV/UZZ16p0GxqhYbPL2+IdHKoamJZX6OKqrYEgjpm6dX7A5vtji6SAwKy8dZQjG\nVRo+kCbyusCFQNnunwfgrHRf\n-----END PRIVATE KEY-----\n",
+  "client_email": "kevin-newaim@kevin-newaim.iam.gserviceaccount.com",
+  "client_id": "105742094101991190823",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/kevin-newaim%40kevin-newaim.iam.gserviceaccount.com"
+}
