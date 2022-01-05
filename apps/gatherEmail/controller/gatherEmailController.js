@@ -13,12 +13,14 @@ const {OAuth2Client} = require("google-auth-library/build/src/auth/oauth2client"
 
 class GatherEmailController {
     googleUrl = 'https://drive.google.com/file/d/1DtB1f2pj9FbvRRfjUQ9ZO7MFCjlXsA0r/view?usp=sharing';
+    // 配置权限
     SCOPES = [
         'https://www.googleapis.com/auth/drive',
         'https://www.googleapis.com/auth/drive.file',
         'https://www.googleapis.com/auth/drive.appdata',
     ];
     TOKEN_PATH = 'token.json';
+
     /**
      * 下载Google Drive文件
      * @returns {GatherEmailController}
@@ -29,7 +31,7 @@ class GatherEmailController {
         fs.readFile('./resource/key/client_secret_kevin.json', (err, content) => {
             if (err) return console.log('Error loading client secret file:', err);
             // Authorize a client with credentials, then call the Google Tasks API.
-            this.authorize(JSON.parse(content), this.listFiles);
+            this.authorize(JSON.parse(content), this.downloadFile);
         });
 
         request.get(this.googleUrl, function(err, response, body){
@@ -115,6 +117,42 @@ class GatherEmailController {
                 console.log('No files found.');
             }
         });
+    }
+
+    /**
+     * 下载文件 ByID
+     * @param auth
+     */
+    downloadFile(auth){
+        const drive = google.drive({version: 'v3', auth});
+        let fileId = '1DD-VTVAc2EgpKao9tjinvyWX6lKMzFaflU1t1nYudAU';
+        let dest = fs.createWriteStream('./tmp/resume.pdf');
+        drive.files.get({
+            fileId: fileId,
+            mimeType: 'application/pdf'
+        }, function(err, metadata){
+            if (err) {
+                console.error("Error GET files :" +  err);
+                return process.exit();
+            }
+
+            console.log('Downloading %s...', metadata.data.name);
+
+            let dest = fs.createWriteStream(metadata.data.name);
+
+            drive.files.get({fileId: fileId, mimeType: 'application/pdf'}).on('error', function (err) {
+                console.log('Error downloading file', err);
+                process.exit();
+            }).pipe(dest);
+
+            dest.on('finish', function () {
+                console.log('Downloaded %s!', metadata.data.name);
+                return true
+            }).on('error', function (err) {
+                console.log('Error writing file', err);
+                return false;
+            });
+        })
     }
 }
 
