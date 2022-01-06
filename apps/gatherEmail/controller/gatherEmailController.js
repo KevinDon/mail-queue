@@ -5,10 +5,9 @@
  **/
 const request = require('request');
 const fs = require('fs');
-const readline = require('readline');
-const { google } = require('googleapis');
-const token = require('../../../resource/key/newaim01-94318d82578f.json')
-const {OAuth2Client} = require("google-auth-library/build/src/auth/oauth2client");
+const uuid = require('uuid');
+const {google} = require('googleapis');
+const moment = require('moment');
 
 
 class GatherEmailController {
@@ -34,7 +33,7 @@ class GatherEmailController {
             this.authorize(JSON.parse(content), this.downloadFile);
         });
 
-        request.get(this.googleUrl, function(err, response, body){
+        request.get(this.googleUrl, function (err, response, body) {
             //console.log(response);
             // let detailsParse = JSON.parse(body);
             // console.log(detailsParse)
@@ -74,11 +73,6 @@ class GatherEmailController {
                 scope: this.SCOPES,
             });
             console.log('Authorize this app by visiting this url:', authUrl);
-            // const rl = await readline.createInterface({
-            //     input: process.stdin,
-            //     output: process.stdout,
-            // });
-           // let { code } = await rl.question('Enter the code from that page here: ')
             oAuth2Client.getToken('4/0AX4XfWidjAzhMRKXgQF9JdqOilwXNOH372fvZuXdNZNVuzfni9gGBAMyiyWfpLWjcEDDFw', (err, token) => {
                 if (err) return console.error('Error retrieving access token', err);
                 oAuth2Client.setCredentials(token);
@@ -89,7 +83,7 @@ class GatherEmailController {
                 });
                 resolve(oAuth2Client)
             })
-        }).catch((err)=>{
+        }).catch((err) => {
             console.log(err);
         }).then((res) => {
             callback(res);
@@ -112,6 +106,8 @@ class GatherEmailController {
                 console.log('Files:');
                 files.map((file) => {
                     console.log(`${file.name} (${file.id})`);
+                    this.downloadFile(auth, file.id)
+
                 });
             } else {
                 console.log('No files found.');
@@ -123,35 +119,30 @@ class GatherEmailController {
      * 下载文件 ByID
      * @param auth
      */
-    downloadFile(auth){
+    downloadFile(auth, fileID) {
         const drive = google.drive({version: 'v3', auth});
-        let fileId = '1DD-VTVAc2EgpKao9tjinvyWX6lKMzFaflU1t1nYudAU';
-        let dest = fs.createWriteStream('./tmp/resume.pdf');
+        let _fileId = '1WWXJGRKnxBwfiWcc2tc3ElUd2i8pHLrt', dest;
+        let progress = 0;
+        if(fileID !== _fileId) return;
         drive.files.get({
-            fileId: fileId,
-            mimeType: 'application/pdf'
-        }, function(err, metadata){
-            if (err) {
-                console.error("Error GET files :" +  err);
-                return process.exit();
-            }
-
-            console.log('Downloading %s...', metadata.data.name);
-
-            let dest = fs.createWriteStream(metadata.data.name);
-
-            drive.files.get({fileId: fileId, mimeType: 'application/pdf'}).on('error', function (err) {
-                console.log('Error downloading file', err);
-                process.exit();
-            }).pipe(dest);
-
-            dest.on('finish', function () {
-                console.log('Downloaded %s!', metadata.data.name);
-                return true
-            }).on('error', function (err) {
-                console.log('Error writing file', err);
-                return false;
-            });
+                fileId: fileId,
+                alt: 'media'
+            },
+            {responseType: 'stream'},
+            (err, res) => {
+                if (err) return console.log('The API returned an error: ' + err);
+                let time = moment().format();
+                dest = fs.createWriteStream(`./tmp/${uuid.v4().replace(/-/g, '')}_resume.pdf`);
+                res.data.on('end', () =>{
+                    console.log('Done downloading file.');
+                }).on('data', d => {
+                    progress += d.length;
+                    if (process.stdout.isTTY) {
+                        process.stdout.clearLine();
+                        process.stdout.cursorTo(0);
+                        process.stdout.write(`Downloaded ${progress} bytes`);
+                    }
+                }).pipe(dest);
         })
     }
 }
