@@ -30,7 +30,7 @@ class GatherEmailController {
         fs.readFile('./resource/key/client_secret_kevin.json', (err, content) => {
             if (err) return console.log('Error loading client secret file:', err);
             // Authorize a client with credentials, then call the Google Tasks API.
-            this.authorize(JSON.parse(content), this.downloadFile);
+            this.authorize(JSON.parse(content), this.listFiles);
         });
 
         request.get(this.googleUrl, function (err, response, body) {
@@ -49,14 +49,14 @@ class GatherEmailController {
      */
     authorize(credentials, callback) {
         const {client_secret, client_id, redirect_uris} = credentials.web;
-
+        console.log(this);
         const oAuth2Client = new google.auth.OAuth2(client_id, client_secret, redirect_uris[0]);
 
         // Check if we have previously stored a token.
         fs.readFile(this.TOKEN_PATH, (err, token) => {
             if (err) return this.getAccessToken(oAuth2Client, callback);
             oAuth2Client.setCredentials(JSON.parse(token));
-            callback(oAuth2Client);
+            callback(oAuth2Client, this);
         });
     }
 
@@ -94,7 +94,7 @@ class GatherEmailController {
      * Lists the names and IDs of up to 10 files.
      * @param {google.auth.OAuth2} auth An authorized OAuth2 client.
      */
-    listFiles(auth) {
+    listFiles(auth,self) {
         const drive = google.drive({version: 'v3', auth});
         drive.files.list({
             pageSize: 10,
@@ -106,8 +106,7 @@ class GatherEmailController {
                 console.log('Files:');
                 files.map((file) => {
                     console.log(`${file.name} (${file.id})`);
-                    this.downloadFile(auth, file.id)
-
+                    self.downloadFile(auth, file.id)
                 });
             } else {
                 console.log('No files found.');
@@ -125,7 +124,7 @@ class GatherEmailController {
         let progress = 0;
         if(fileID !== _fileId) return;
         drive.files.get({
-                fileId: fileId,
+                fileId: _fileId,
                 alt: 'media'
             },
             {responseType: 'stream'},
