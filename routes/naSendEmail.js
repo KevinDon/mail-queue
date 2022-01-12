@@ -27,7 +27,7 @@ var  sql = 'SELECT * FROM na_email_submission';
 
 /* Send Email Newaim. */
 router.post('/', function(req, res, next) {
-    gatherEmailController.downloadGoogleFile();
+    /**  TODO 保存到数据库
     connection.query(sql, function (err, result) {
         if(err){
             console.log('[SELECT ERROR] - ',err.message);
@@ -36,9 +36,14 @@ router.post('/', function(req, res, next) {
         //把搜索值输出
         console.log(result);
     });
-    res
-        .status(500)
-        .json({ error: 'message' })
+    **/
+
+    gatherEmailController.downloadGoogleFile(req.body).then(data => {
+        res
+            .status(200)
+            .json(data)
+    });
+
 });
 
 module.exports = router;

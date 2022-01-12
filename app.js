@@ -4,7 +4,7 @@
 // import cookieParser from 'cookie-parser';
 // import logger from 'morgan';
 // import typeOrm from 'typeorm';
-// import dbConfig from './config/db.config.js';
+// import dbConfig from './config/db.system.config.js';
 // import {emailSubmission} from './entity/emailSubmissionEntity.js';
 
 /* TODO 修改成ES6*/
